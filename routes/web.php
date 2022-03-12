@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AppController::class, 'welcome']);
-Route::get('/test', function(){
+Route::get('/tes', function(){
     return "hello chams";
 });
