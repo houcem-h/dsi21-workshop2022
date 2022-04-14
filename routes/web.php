@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AppController;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,18 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AppController::class, 'welcome']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// // Read
-// Route::get('/posts', [PostController::class, 'allPosts']);
-// Route::get('/posts/{id}', [PostController::class, 'getPost']);
-// // Create
-// Route::get('/posts/create', [PostController::class, 'createPostForm']);
-// Route::post('/posts', [PostController::class, 'createPost']);
-// // Update
-// Route::get('/posts/{id}/edit', [PostController::class, 'editPostForm']);
-// Route::put('/posts/{id}', [PostController::class, 'editPost']);
-// // Delete
-// Route::delete('/posts/{id}', [PostController::class, 'deletePost']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::resource('/posts', PostController::class);
+require __DIR__.'/auth.php';
