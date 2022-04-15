@@ -36,7 +36,7 @@
                             {{ substr($post->body, 50)." ..." }}
                         </td>
                         <td class="px-6 py-4">
-
+                            {{ $post->category->name }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $post->created_at }}
