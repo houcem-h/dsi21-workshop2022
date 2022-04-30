@@ -28,7 +28,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="container py-3">
                 {{ $slot }}
             </main>
         </div>
