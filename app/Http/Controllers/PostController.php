@@ -40,6 +40,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->validationRules());
         // alternative 1
         $post = new Post();
         $post->title = $request->title;
@@ -105,5 +106,15 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validationRules()
+    {
+        return [
+            'title' => ['required', 'min:5', 'max:255'],
+            'body' => 'required|min:10',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+        ];
     }
 }

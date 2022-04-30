@@ -4,15 +4,29 @@
             {{ __('Posts') }}
         </h2>
     </x-slot>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+
+    @endif
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
-          <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp">
+          <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" id="title" aria-describedby="emailHelp">
+          @error('title')
+            <small class="text-danger">{{ $message }}</small>
+          @enderror
+
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Body</label>
-            <textarea class="form-control" name="body" id="body" rows="3"></textarea>
+            <textarea class="form-control" name="body" id="body" rows="3">{{ old('body') }}</textarea>
         </div>
         <div class="mb-3">
             <label for="user" class="form-label">Author</label>

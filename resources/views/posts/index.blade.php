@@ -24,7 +24,7 @@
                     <td>{{ Str::substr($post->body, 0, 30).'...' }}</td>
                     <td>{{ $post->category->name }}</td>
                     <td>
-                        <a href="/posts/{{ $post->id }}" class="btn btn-outline-info">Show</a>
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-info">Show</a>
                         <button class="btn btn-outline-warning">Edit</button>
                         <button class="btn btn-outline-danger">Delete</button>
                     </td>
