@@ -40,7 +40,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // alternative 1
+        $post = new Post();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = $request->user_id;
+        $post->category_id = $request->category_id;
+        $post->save();
+
+        // alternative 2
+        // $post = Post::create([
+        //     'title' => $request->title,
+        //     'body' => $request->body,
+        //     'user_id' => $request->user_id,
+        //     'category_id' => $request->category_id
+        // ]);
+        // Alternative 3
+        // Post::create($request->all());
+
+        dd('Post added successfully');
     }
 
     /**
