@@ -14,7 +14,7 @@
         </div>
 
     @endif
-    <form action="{{ route('posts.store') }}" method="POST">
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
@@ -28,6 +28,13 @@
             <label for="body" class="form-label">Body</label>
             <textarea class="form-control" name="body" id="body" rows="3">{{ old('body') }}</textarea>
         </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" id="image" aria-describedby="emailHelp">
+            @error('image')
+              <small class="text-danger">{{ $message }}</small>
+            @enderror
+          </div>
         <div class="mb-3">
             <label for="user" class="form-label">Author</label>
             <select class="form-select" name="user_id" id="user" aria-label="Default select example">
