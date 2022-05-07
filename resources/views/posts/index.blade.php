@@ -4,6 +4,12 @@
             {{ __('Posts') }}
         </h2>
     </x-slot>
+    @if (Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{Session::get('success')}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
     <a href="{{route('posts.create')}}" type="button" class="btn btn-primary">New post</a>
     <h2>Posts list</h2>
     <table class="table">
@@ -26,7 +32,14 @@
                     <td>
                         <a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-info">Show</a>
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-warning">Edit</a>
-                        <button class="btn btn-outline-danger">Delete</button>
+                        <a href="#" class="btn btn-outline-danger"
+                        onclick="event.preventDefault();
+                        document.querySelector('#delete-post-form-{{ $post->id }}').submit();"
+                        >Delete</a>
+                        <form id="delete-post-form-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </td>
                 </tr>
             @endforeach
