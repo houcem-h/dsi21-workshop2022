@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import "./../../plugins/axios";
 export default {
     name: "Login",
     props: {
@@ -57,7 +58,14 @@ export default {
     },
     methods: {
         fireLogin() {
-            console.log(this.credentials);
+            axios
+                .post("login", this.credentials)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
 };
