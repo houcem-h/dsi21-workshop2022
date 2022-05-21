@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer v-model="sidebar" app>
+        <!-- <v-navigation-drawer v-model="sidebar" app>
             <v-list>
                 <v-list-item
                     v-for="item in menuItems"
@@ -13,7 +13,7 @@
                     <v-list-item-content>{{ item.title }}</v-list-item-content>
                 </v-list-item>
             </v-list>
-        </v-navigation-drawer>
+        </v-navigation-drawer> -->
 
         <v-app-bar>
             <span class="hidden-sm-and-up">
@@ -26,15 +26,28 @@
                 </router-link>
             </v-app-bar-title>
             <v-spacer></v-spacer>
-            <v-btn
-                text
-                v-for="item in menuItems"
-                :key="item.title"
-                :to="item.path"
-            >
-                <v-icon left dark>{{ item.icon }}</v-icon>
-                {{ item.title }}
-            </v-btn>
+            <div v-if="!loggedIn">
+                <v-btn
+                    text
+                    v-for="item in guestMenuItems"
+                    :key="item.title"
+                    :to="item.path"
+                >
+                    <v-icon left dark>{{ item.icon }}</v-icon>
+                    {{ item.title }}
+                </v-btn>
+            </div>
+            <div v-else>
+                <v-btn
+                    text
+                    v-for="item in userMenuItems"
+                    :key="item.title"
+                    :to="item.path"
+                >
+                    <v-icon left dark>{{ item.icon }}</v-icon>
+                    {{ item.title }}
+                </v-btn>
+            </div>
         </v-app-bar>
 
         <v-main>
@@ -44,6 +57,7 @@
 </template>
 
 <script>
+import "@/store/index";
 export default {
     name: "App",
 
@@ -51,12 +65,22 @@ export default {
         return {
             appTitle: "Awesome App",
             sidebar: false,
-            menuItems: [
+            guestMenuItems: [
                 { title: "Home", path: "/home", icon: "home" },
-                { title: "Sign Up", path: "/signup", icon: "face" },
-                { title: "Sign In", path: "/signin", icon: "lock_open" },
+                { title: "Register", path: "/signup", icon: "face" },
+                { title: "Login", path: "/login", icon: "lock_open" },
+            ],
+            userMenuItems: [
+                { title: "Home", path: "/home", icon: "home" },
+                { title: "Profile", path: "/profile", icon: "account_circle" },
+                { title: "Logout", path: "#", icon: "logout" },
             ],
         };
+    },
+    computed: {
+        loggedIn() {
+            return this.$store.getters.loggedIn;
+        },
     },
 };
 </script>
