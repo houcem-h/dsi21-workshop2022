@@ -1,55 +1,64 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-app>
+        <v-navigation-drawer v-model="sidebar" app>
+            <v-list>
+                <v-list-tile
+                    v-for="item in menuItems"
+                    :key="item.title"
+                    :to="item.path"
+                >
+                    <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+        <v-toolbar app>
+            <span class="hidden-sm-and-up">
+                <v-toolbar-side-icon @click="sidebar = !sidebar">
+                </v-toolbar-side-icon>
+            </span>
+            <v-toolbar-title>
+                <router-link to="/" tag="span" style="cursor: pointer">
+                    {{ appTitle }}
+                </router-link>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items class="hidden-xs-only">
+                <v-btn
+                    flat
+                    v-for="item in menuItems"
+                    :key="item.title"
+                    :to="item.path"
+                >
+                    <v-icon left dark>{{ item.icon }}</v-icon>
+                    {{ item.title }}
+                </v-btn>
+            </v-toolbar-items>
+        </v-toolbar>
 
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app>
+        <v-main>
+            <router-view />
+        </v-main>
+    </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+    name: "App",
 
-  data: () => ({
-    //
-  }),
+    data() {
+        return {
+            appTitle: "Awesome App",
+            sidebar: false,
+            menuItems: [
+                { title: "Home", path: "/home", icon: "home" },
+                { title: "Sign Up", path: "/signup", icon: "face" },
+                { title: "Sign In", path: "/signin", icon: "lock_open" },
+            ],
+        };
+    },
 };
 </script>
