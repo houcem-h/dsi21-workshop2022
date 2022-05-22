@@ -2,6 +2,7 @@
 
 import Vue from "vue";
 import axios from "axios";
+import store from "./../store";
 
 // Full config:  https://github.com/axios/axios#request-config
 axios.defaults.baseURL =
@@ -21,6 +22,10 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
     function (config) {
         // Do something before request is sent
+        const token = store.getters.token;
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
         return config;
     },
     function (error) {
