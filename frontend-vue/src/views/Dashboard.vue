@@ -1,5 +1,10 @@
 <template>
-    <h1>Dashboard page</h1>
+    <v-data-table
+        :headers="headers"
+        :items="posts"
+        :items-per-page="5"
+        class="elevation-1"
+    ></v-data-table>
 </template>
 
 <script>
@@ -8,6 +13,16 @@ export default {
     name: "Dashboard",
     data() {
         return {
+            headers: [
+                {
+                    text: "Title",
+                    align: "left",
+                    value: "title",
+                },
+                { text: "Body", value: "body" },
+                { text: "Published", value: "published" },
+                { text: "Actions", value: "actions" },
+            ],
             posts: [],
         };
     },
