@@ -47,6 +47,10 @@
                     <v-icon left dark>{{ item.icon }}</v-icon>
                     {{ item.title }}
                 </v-btn>
+                <v-btn text key="Logout" @click="logout">
+                    <v-icon left dark>logout</v-icon>
+                    Logout
+                </v-btn>
             </div>
         </v-app-bar>
 
@@ -73,13 +77,17 @@ export default {
             userMenuItems: [
                 { title: "Home", path: "/dashboard", icon: "home" },
                 { title: "Profile", path: "/profile", icon: "account_circle" },
-                { title: "Logout", path: "/logout", icon: "logout" },
             ],
         };
     },
     computed: {
         loggedIn() {
             return this.$store.getters.loggedIn;
+        },
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch("logout");
         },
     },
 };
