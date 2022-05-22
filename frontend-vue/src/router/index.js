@@ -18,6 +18,13 @@ const routes = [
         },
     },
     {
+        path: "/dashboard",
+        name: "dashboard",
+        component: function () {
+            return import("../views/Dashboard.vue");
+        },
+    },
+    {
         path: "/about",
         name: "about",
         // route level code-splitting
