@@ -72,5 +72,8 @@ export default {
         loggedIn(state) {
             return state.loggedIn;
         },
+        isAdmin(state) {
+            return state.user?.is_admin == 1;
+        },
     },
 };

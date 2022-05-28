@@ -25,6 +25,13 @@ const routes = [
         },
     },
     {
+        path: "/admin",
+        name: "admin",
+        component: function () {
+            return import("../views/admin/AdminDashboard.vue");
+        },
+    },
+    {
         path: "/about",
         name: "about",
         // route level code-splitting

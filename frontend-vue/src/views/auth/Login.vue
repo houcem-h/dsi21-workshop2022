@@ -59,7 +59,9 @@ export default {
     methods: {
         fireLogin() {
             this.$store.dispatch("login", this.credentials).then(() => {
-                this.$router.push(this.source || "/");
+                this.$store.getters.isAdmin
+                    ? this.$router.push("/admin")
+                    : this.$router.push("/");
             });
         },
     },
