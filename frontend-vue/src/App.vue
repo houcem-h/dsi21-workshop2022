@@ -75,7 +75,7 @@ export default {
                 { title: "Login", path: "/login", icon: "lock_open" },
             ],
             userMenuItems: [
-                { title: "Home", path: "/dashboard", icon: "home" },
+                { title: "Home", path: "/posts", icon: "home" },
                 { title: "Profile", path: "/profile", icon: "account_circle" },
             ],
         };

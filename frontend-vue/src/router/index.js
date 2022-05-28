@@ -18,10 +18,10 @@ const routes = [
         },
     },
     {
-        path: "/dashboard",
-        name: "dashboard",
+        path: "/posts",
+        name: "posts",
         component: function () {
-            return import("../views/Dashboard.vue");
+            return import("../views/Posts.vue");
         },
     },
     {

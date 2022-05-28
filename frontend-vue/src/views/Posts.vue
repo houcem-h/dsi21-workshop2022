@@ -10,7 +10,7 @@
 <script>
 import "@/store/index";
 export default {
-    name: "Dashboard",
+    name: "Posts",
     data() {
         return {
             headers: [
