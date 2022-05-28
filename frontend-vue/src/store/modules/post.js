@@ -15,7 +15,7 @@ export default {
                 axios
                     .get("posts")
                     .then((response) => {
-                        commit("SET_POSTS", response.data);
+                        commit("SET_POSTS", response.data.data);
                         resolve(response);
                     })
                     .catch((error) => {
